@@ -28,6 +28,9 @@ App                         General Page Wrapper
                 -> SearchBar
                     State: update onChange
 
+
+            )
+
                 -> Companies        Render list of companies
                         Props: current company
                         State: none
