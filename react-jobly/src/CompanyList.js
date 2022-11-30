@@ -4,12 +4,12 @@
  * App=>RoutesList=>CompanyList
 */
 
-function CompanyList () {
-  return(
+function CompanyList() {
+  return (
     <div className="CompanyList">
       CompanyList
     </div>
-  )
+  );
 }
 
-export default CompanyList
+export default CompanyList;

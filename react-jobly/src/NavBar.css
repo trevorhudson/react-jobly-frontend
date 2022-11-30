@@ -9,7 +9,7 @@ li:first-child {
 
 li:not(:first-child) {
   float: right;
-  padding-left:30px;
+  padding-left:20px;
 }
 
 ul {
@@ -21,5 +21,10 @@ ul {
 .NavBar {
     background-color:white;
     overflow: hidden
+}
+
+.NavBarList a.active{
+    color: black;
+    font-weight: bolder
 }
 
