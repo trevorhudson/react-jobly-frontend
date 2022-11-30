@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import CompanyDetail from './CompanyDetail';
@@ -17,7 +17,7 @@ function RoutesList() {
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:handle" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
-      <Route path="*" element={<Homepage />} />
+      <Route path="*" element={<Navigate to='/' />} />
     </Routes>
   );
 };

@@ -16,45 +16,44 @@ import JoblyApi from "./api";
 */
 
 function CompanyList() {
-  const [displayedCompanies, setDisplayedCompanies] = useState([]);
+  const [displayedCompanies, setDisplayedCompanies] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   console.log('CompanyList: ', displayedCompanies);
 
-  /** Search function passed to SearchBar */
-  function search(searchInput) {
-    const term = searchInput.search;
-    console.log('Set Search Term: ', term);
-    setSearchTerm(term);
-  }
+  /** Triggered on mount, and re-render */
+  useEffect(function getCompaniesOnMount() {
 
-
-  useEffect(function () {
-
-    async function handleSearch() {
-      console.log('useEffect', searchTerm);
-      setIsLoading(true);
-      const companies = searchTerm
+    async function getCompanies() {
+      const searchResults = searchTerm
         ? await JoblyApi.filterCompanies(searchTerm)
         : await JoblyApi.getAllCompanies();
-      setDisplayedCompanies(companies);
-      setIsLoading(false);
+      setDisplayedCompanies(searchResults);
     }
-    handleSearch();
+    getCompanies();
 
   }, [searchTerm]);
 
 
+  /** Search function passed to SearchBar
+   * Accepts: String
+   */
+  function search(term) {
+    console.log('Set Search Term: ', term);
+    setSearchTerm(term);
+  }
+
+  if (!displayedCompanies) return <h1>Loading...</h1>;
+
   return (
     <div className="CompanyList">
-
+      CompanyList
       <SearchBar search={search} />
-      {isLoading && <h1>Is loading!!!!!!!</h1>}
-      {!isLoading &&
-        <CompanyCardList displayedCompanies={displayedCompanies} />
-      }
-      {(!isLoading && displayedCompanies.length === 0) && <p>Sorry, no results were found!!</p>}
+
+      {displayedCompanies.length
+        ? <CompanyCardList displayedCompanies={displayedCompanies} />
+        : <p>Sorry, no results were found!!</p>}
+
     </div>
   );
 };

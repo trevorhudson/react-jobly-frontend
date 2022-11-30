@@ -5,7 +5,7 @@ import JobCard from './JobCard';
  * - Props: jobs: [{"id", "title", "salary", "equity"}, ... ]
  * - State: none
  *
- * App -> JobList -> JobCardList
+ * App -> JobList -> JobCardList -> JobCard
  */
 function JobCardList({ jobs }) {
   console.log('jobCardList', jobs);

@@ -8,16 +8,18 @@
         "title": "Technical brewer",
         "salary": 157000,
         "equity": "0"
-      },
+      }
 
-  * App -> JobList, CompanyDetail -> JobCardList -> JobCard
+  - State: none
+
+  *  JobCardList -> JobCard
  */
 
 function JobCard({ job }) {
   // console.log('JobCard', JobCard);
 
   return (
-    <div className='JobCard card'>
+    <div className='JobCard'>
       <div className='card-body'>
         <h6>{job.title}</h6>
         <p>{job.companyName}</p>

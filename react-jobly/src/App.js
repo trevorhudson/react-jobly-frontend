@@ -8,6 +8,7 @@ import React from 'react';
  * props: none
  * state: none
  *
+ * App -> NavBar, RoutesList
 */
 
 function App() {

@@ -1,7 +1,7 @@
 import JoblyApi from "./api";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import JobCardList from "./JobCardList";
 
 /** Renders details per company handle
@@ -15,17 +15,19 @@ import JobCardList from "./JobCardList";
 
 function CompanyDetail() {
   const [company, setCompany] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // move state to company
+
   const { handle } = useParams();
 
-  /** Queries API for single company */
+  /** Queries API for single company  TODO: name function*/
   useEffect(function () {
     async function getCompany() {
+      // TODO: move await outside of setState()
       setCompany(await JoblyApi.getCompany(handle));
       setIsLoading(false);
     }
     getCompany();
-  }, []);
+  }, [handle]);
 
   return (
     <div className="CompanyDetail">

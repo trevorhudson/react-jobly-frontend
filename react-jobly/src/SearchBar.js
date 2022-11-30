@@ -28,7 +28,7 @@ function SearchBar({ search }) {
   /** onSubmit -> submit search terms. Calls parent function */
   function handleSubmit(evt) {
     evt.preventDefault();
-    search(formData);
+    search(formData.search);
   }
 
   return (
