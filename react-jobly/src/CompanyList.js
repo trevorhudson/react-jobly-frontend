@@ -12,10 +12,11 @@ import JoblyApi from "./api";
 */
 
 function CompanyList() {
-  const [companiesFilter, setCompaniesFilter] = useState();
-  const [searchTerm, setSearchTerm] = useState();
+  const [displayedCompanies, setDisplayedCompanies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log('CompanyList: ', companiesFilter);
+  console.log('CompanyList: ', displayedCompanies);
 
   /** Search function passed to SearchBar */
   function search(searchInput) {
@@ -29,11 +30,12 @@ function CompanyList() {
 
     async function handleSearch() {
       console.log('useEffect', searchTerm);
-
+      setIsLoading(true);
       const companies = searchTerm
         ? await JoblyApi.filterCompanies(searchTerm)
         : await JoblyApi.getAllCompanies();
-      setCompaniesFilter(companies);
+      setDisplayedCompanies(companies);
+      setIsLoading(false);
     }
     handleSearch();
 
@@ -44,8 +46,11 @@ function CompanyList() {
     <div className="CompanyList">
       CompanyList
       <SearchBar search={search} />
-      <CompanyCardList />
-
+      {isLoading && <h1>Is loading!!!!!!!</h1>}
+      {!isLoading &&
+        <CompanyCardList displayedCompanies={displayedCompanies} />
+      }
+      {(!isLoading && displayedCompanies.length === 0 ) && <p>Sorry, no results were found!!</p>}
     </div>
   );
 };
