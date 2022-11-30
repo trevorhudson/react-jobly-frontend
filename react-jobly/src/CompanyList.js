@@ -50,7 +50,7 @@ function CompanyList() {
       {!isLoading &&
         <CompanyCardList displayedCompanies={displayedCompanies} />
       }
-      {(!isLoading && displayedCompanies.length === 0 ) && <p>Sorry, no results were found!!</p>}
+      {(!isLoading && displayedCompanies.length === 0) && <p>Sorry, no results were found!!</p>}
     </div>
   );
 };
