@@ -1,0 +1,9 @@
+.card-body {
+    margin: 0 auto;
+    outline: solid;
+    max-width: 1000px;
+}
+
+.CompanyCard .logo {
+    max-width: 50px;
+}

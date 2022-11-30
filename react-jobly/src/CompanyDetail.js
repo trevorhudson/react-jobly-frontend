@@ -5,9 +5,12 @@ import axios from "axios";
 import JobCardList from "./JobCardList";
 
 /** Renders details per company handle
- * props: none
- * state: company details from api call. {handle, name, description,numEmployees,jobs:[job1....]}
- * App=> RoutesList=> CompanyDetail
+ * - props: none
+ * - state:
+ *    - company {handle, name, description,numEmployees,jobs:[job1, ...]}
+ *    - isLoading = (true/false)
+ *
+ * App -> RoutesList -> CompanyDetail
 */
 
 function CompanyDetail() {
@@ -15,6 +18,7 @@ function CompanyDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const { handle } = useParams();
 
+  /** Queries API for single company */
   useEffect(function () {
     async function getCompany() {
       setCompany(await JoblyApi.getCompany(handle));
@@ -29,7 +33,7 @@ function CompanyDetail() {
       {!isLoading &&
         <div>
           <h4>{company.name}</h4>
-          <p>{company.detail}</p>
+          <p>{company.description}</p>
           <JobCardList jobs={company.jobs} />
         </div>
       }

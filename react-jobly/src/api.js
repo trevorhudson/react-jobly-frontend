@@ -39,20 +39,17 @@ class JoblyApi {
   // Individual API routes
 
   /** Get details on a company by handle. */
-
   static async getCompany(handle) {
     const res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get details on a company by search Term. */
-
+  /** Find company by search Term. */
   static async filterCompanies(handle) {
     const res = await this.request(`companies/?nameLike=${handle}`);
     return res.companies;
   }
 
-  //TODO: DEPRECATED
   /** Get details on all companies. */
   static async getAllCompanies() {
     const res = await this.request('companies');
@@ -64,7 +61,12 @@ class JoblyApi {
     const res = await this.request("jobs");
     return res.jobs;
   }
-  // obviously, you'll add a lot here ...
+
+  /** Find Job by search Term. */
+  static async filterJobs(title) {
+    const res = await this.request(`jobs/?title=${title}`);
+    return res.jobs;
+  }
 }
 
 

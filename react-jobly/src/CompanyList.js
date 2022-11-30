@@ -6,9 +6,13 @@ import JoblyApi from "./api";
 
 
 /** Renders company list page
- * props: none
- * state: list companies from api request [company1,company2,company3]
- * App=>RoutesList=>CompanyList
+ * - props: none
+ * - state:
+ *    - displayedCompanies like [company1, company2, ...]
+ *    - searchTerm like 'anderson'
+ *    - isLoading = (true/false)
+ *
+ * App -> RoutesList -> CompanyList
 */
 
 function CompanyList() {
@@ -44,7 +48,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      CompanyList
+
       <SearchBar search={search} />
       {isLoading && <h1>Is loading!!!!!!!</h1>}
       {!isLoading &&

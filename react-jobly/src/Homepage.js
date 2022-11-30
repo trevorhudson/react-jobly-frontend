@@ -1,7 +1,7 @@
 /** Renders the home page
  * state: none
  * props: none
- * App=>Routes=>HomePage
+ * App -> Routes -> HomePage
  */
 
 function Homepage() {
