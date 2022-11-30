@@ -13,7 +13,8 @@ function CompanyCardList({ displayedCompanies }) {
 
   return (
     <div className='CompanyCardList'>
-      {displayedCompanies.map(company => (<CompanyCard key={company.handle} company={company} />))}
+      {displayedCompanies.map(company =>
+         (<CompanyCard key={company.handle} company={company} />))}
     </div>
   );
 

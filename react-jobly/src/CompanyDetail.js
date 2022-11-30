@@ -1,5 +1,5 @@
 import JoblyApi from "./api";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 // import axios from "axios";
 import JobCardList from "./JobCardList";
@@ -14,31 +14,39 @@ import JobCardList from "./JobCardList";
 */
 
 function CompanyDetail() {
-  const [company, setCompany] = useState();
-  const [isLoading, setIsLoading] = useState(true); // move state to company
-
+  const [company, setCompany] = useState(null);
+  console.log("setCompany", company);
+  
   const { handle } = useParams();
+  const navigate = useNavigate();
 
-  /** Queries API for single company  TODO: name function*/
-  useEffect(function () {
+  /** Triggered on mount, and re-render */
+  useEffect(function getCompanyOnMount() {
     async function getCompany() {
-      // TODO: move await outside of setState()
-      setCompany(await JoblyApi.getCompany(handle));
-      setIsLoading(false);
+      try {
+        const companyDetail = await JoblyApi.getCompany(handle);
+        setCompany(companyDetail);
+      } catch (error) {
+        navigate("/companies");
+      }
+
     }
     getCompany();
   }, [handle]);
 
+  if (!company) return <h1>Loading...</h1>;
+
   return (
     <div className="CompanyDetail">
-      {isLoading && <p>Is loading!!!!</p>}
-      {!isLoading &&
+      {company ?
         <div>
           <h4>{company.name}</h4>
           <p>{company.description}</p>
           <JobCardList jobs={company.jobs} />
-        </div>
+        </div> :
+        <p>Company doesn't exist!!</p>
       }
+
     </div>
   );
 };
