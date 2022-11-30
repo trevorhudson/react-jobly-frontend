@@ -44,6 +44,15 @@ class JoblyApi {
     const res = await this.request(`companies/${handle}`);
     return res.company;
   }
+
+  /** Get details on a company by search Term. */
+
+  static async filterCompanies(handle) {
+    const res = await this.request(`companies/?nameLike=${handle}`);
+    return res.companies;
+  }
+
+  //TODO: DEPRECATED
   /** Get details on all companies. */
   static async getAllCompanies() {
     const res = await this.request('companies');
@@ -57,3 +66,6 @@ class JoblyApi {
   }
   // obviously, you'll add a lot here ...
 }
+
+
+export default JoblyApi;
