@@ -16,6 +16,7 @@ function RoutesList() {
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:handle" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
+      <Route path="*" element={<Homepage />} />
     </Routes>
   );
 };
