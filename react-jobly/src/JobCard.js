@@ -19,7 +19,7 @@ function JobCard({ job }) {
   // console.log('JobCard', JobCard);
 
   return (
-    <div className='JobCard'>
+    <div className='JobCard card'>
       <div className='card-body'>
         <h6>{job.title}</h6>
         <p>{job.companyName}</p>

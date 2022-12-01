@@ -3,6 +3,8 @@ import SearchBar from "./SearchBar";
 import { useState } from 'react';
 import JoblyApi from "./api";
 import JobCardList from './JobCardList';
+import PageTurner from "./PageTurner";
+
 
 
 /**
@@ -15,10 +17,18 @@ import JobCardList from './JobCardList';
 */
 
 function JobList() {
-  const [displayedJobs, setDisplayedJobs] = useState(null);
+  const [jobs, setJobs] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(null);
 
-  console.log('JobsList: ', displayedJobs);
+  const displayedJobs = (jobs
+    ? jobs.slice((page - 1) * 20, page * 20)
+    : null
+  );
+
+
+  console.log('JobsList: ', jobs);
+  console.log('Displayed JobsList: ', displayedJobs);
 
   /** Triggered on mount, and re-render */
   useEffect(function getJobsOnMount() {
@@ -28,7 +38,9 @@ function JobList() {
         ? await JoblyApi.filterJobs(searchTerm)
         : await JoblyApi.getAllJobs();
 
-      setDisplayedJobs(searchResults);
+      setJobs(searchResults);
+      setPage(1);
+
     }
     getJobs();
 
@@ -43,13 +55,21 @@ function JobList() {
     setSearchTerm(term);
   }
 
+  /** Update current Page, passed to PageTurner
+ * Accepts: integer
+ */
+  function changePage(nextPage) {
+    setPage(nextPage);
+  }
+
   if (!displayedJobs) return <h1>Loading...</h1>;
 
 
   return (
     <div className="JobList">
-      JobList
       <SearchBar search={search} />
+      <PageTurner currentPage={page} numItems={jobs.length} changePage={changePage} />
+
       {displayedJobs.length
         ? <JobCardList jobs={displayedJobs} />
         : <p>Sorry, no results were found!!</p>}

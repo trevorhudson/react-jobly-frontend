@@ -39,8 +39,10 @@ function CompanyList() {
       const searchResults = searchTerm
         ? await JoblyApi.filterCompanies(searchTerm)
         : await JoblyApi.getAllCompanies();
+
       setCompanies(searchResults);
       setPage(1);
+
     }
     getCompanies();
 
