@@ -35,24 +35,31 @@ function SearchBar({ search }) {
 
     <nav className='SearchBar'>
 
-      <form onSubmit={handleSubmit} className='form-inline col-4 mx-auto'>
-        <div className="form-group mx-sm-3 mb-2">
-          <input
-            type='search'
-            className='form-control'
-            name='search'
-            placeholder='Enter search term..'
-            onChange={handleChange}>
-          </input>
-        </div>
 
-        <button className='btn btn-primary mb-2'>Search</button>
+      <div className='d-flex flex-column justify-content-center'>
+        <form onSubmit={handleSubmit} className='row g-3 '>
 
-      </form >
+
+          <div className='col-3'>
+            <input
+              type='search'
+              className='form-control'
+              name='search'
+              placeholder='Enter search term..'
+              onChange={handleChange}>
+            </input>
+          </div>
+
+          <div className='col-auto'>
+            <button className='btn btn-primary mb-2'>Search</button>
+          </div>
+
+        </form >
+      </div>
     </nav >
 
   );
 
 }
 
-export default SearchBar;
+export default SearchBar;;
