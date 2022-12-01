@@ -9,7 +9,7 @@ import { useState } from 'react';
  * App -> RoutesList -> CompanyList, JobList -> SearchBar
 */
 function SearchBar({ search }) {
-  const [formData, setFormData] = useState('');
+  const [formData, setFormData] = useState(null);
   console.log('searchBar field: ', formData);
 
 
@@ -32,22 +32,24 @@ function SearchBar({ search }) {
   }
 
   return (
-    <div className='SearchBar'>
-      <form onSubmit={handleSubmit}>
-        <div>
+
+    <nav className='SearchBar'>
+
+      <form onSubmit={handleSubmit} className='form-inline col-4 mx-auto'>
+        <div className="form-group mx-sm-3 mb-2">
           <input
-            type='text'
+            type='search'
             className='form-control'
             name='search'
             placeholder='Enter search term..'
             onChange={handleChange}>
           </input>
         </div>
-        <div>
-          <button className='btn'>Submit</button>
-        </div>
+
+        <button className='btn btn-primary mb-2'>Search</button>
+
       </form >
-    </div >
+    </nav >
 
   );
 

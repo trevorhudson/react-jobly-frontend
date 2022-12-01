@@ -65,7 +65,6 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      CompanyList
       <SearchBar search={search} />
       <PageTurner currentPage={page} numItems={companies.length} changePage={changePage} />
 
