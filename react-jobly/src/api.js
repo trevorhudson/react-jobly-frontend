@@ -67,6 +67,27 @@ class JoblyApi {
     const res = await this.request(`jobs/?title=${title}`);
     return res.jobs;
   }
+
+  // TODO: Login, update user, register
+
+  /**Register user and obtain JWT */
+  static async registerUser(data) {
+    const res = await this.request('register', data, method = "post");
+    return res.token;
+  }
+
+  /**Login and obtain JWT */
+  static async loginUser(data) {
+    const res = await this.request('token', data, method = "post");
+    return res.token;
+  }
+
+  /**Update user profile */
+  static async updateUser(data) {
+    const res = await this.request(`${data.username}`, data, method = "patch");
+    return res.user;
+  }
+
 }
 
 

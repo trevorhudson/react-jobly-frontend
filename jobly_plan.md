@@ -1,25 +1,43 @@
 # Jobly Diagram / Schematics
 
-App                         General Page Wrapper
-    Props: none
-    State: none
+App General Page Wrapper
+Props: none
+State: user info
+Context: username, user: first name, user:last name, email, applied jobs
 
-    Jobly                   Render jobly website
-        Props: none
-        State: companies, jobs (fetch from API)
 
 
         NavBar              Navigation bar
             Props: none
-            State: current
+            State: none
 
         Routes List
             -> /companies
             -> /companies:handle
             -> /jobs
+            -> /login
+            -> /signup
+            -> /profile
+            -> /logout
 
             -> /home
 
+            Homepage            Renders homepage
+                Props: None
+                state: None
+
+            LoginForm           Renders Login page
+                Props: callback fn
+                State: form data
+
+
+            SignUp Form          Renders signup page
+                Props: callback fn
+                State: form data
+
+            ProfileForm          Renders profile form
+                Props: callback fn
+                State: form data
 
             CompaniesList         Render list of companies
                 Props: [companies]
@@ -38,7 +56,7 @@ App                         General Page Wrapper
                         -> Company (render single company)
 
             CompanyDetailPage
-                Props: {company}
+                Props: none
                 State: none
 
                 -> Jobs (Map out company jobs)
@@ -46,11 +64,13 @@ App                         General Page Wrapper
 
 
             JobsList               Render list of jobs
-                Props: [jobs]
+                Props: none
                 State: job_name, initial=null (for searching)
 
                 -> SearchBar
                     State: update onChange
 
                 -> Jobs (Map out jobs)
-                    -> Job
+                    -> JobCard
+                        apply button
+
