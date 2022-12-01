@@ -10,11 +10,11 @@ import "./NavBar.css";
 function NavBar() {
   return (
     <div className="NavBar">
-      <nav>
-        <ul className="NavBarList">
-          <li><Link to="/">Jobly</Link></li>
-          <li><NavLink to="/companies">Companies</NavLink></li>
-          <li><NavLink  to="/jobs">Jobs</NavLink></li>
+      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+        <NavLink className='navbar-brand' to="/">Jobly</NavLink>
+        <ul className="navbar-nav">
+          <li className='nav-item'><NavLink className='nav-link' to="/companies">Companies</NavLink></li>
+          <li className='nav-item'><NavLink className='nav-link' to="/jobs">Jobs</NavLink></li>
         </ul>
       </nav>
 

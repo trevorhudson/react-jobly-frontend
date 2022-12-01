@@ -1,4 +1,3 @@
-import './PageTurner.css';
 /** Renders page turner
  *
  * prop : Current page number, function to change the page
