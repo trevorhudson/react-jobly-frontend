@@ -1,5 +1,6 @@
 import CompanyCard from './CompanyCard';
 
+
 /** Renders filtered list of companies from search term
  *
  * - Props: displayedCompanies : [{handle, name, description,numEmployees,jobs:[job1, ...]
@@ -14,7 +15,7 @@ function CompanyCardList({ displayedCompanies }) {
   return (
     <div className='CompanyCardList'>
       {displayedCompanies.map(company =>
-         (<CompanyCard key={company.handle} company={company} />))}
+        (<CompanyCard key={company.handle} company={company} />))}
     </div>
   );
 

@@ -1,0 +1,8 @@
+.PageTurner {
+
+    width: 100px;
+    border: solid 1px grey;
+    margin: 0 auto;
+    border-radius: 1em;
+    padding: .25em;
+}

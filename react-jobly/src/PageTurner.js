@@ -1,3 +1,4 @@
+import './PageTurner.css';
 /** Renders page turner
  *
  * prop : Current page number, function to change the page
@@ -6,29 +7,35 @@
  * CompanyList,JobList => PageTurner
  */
 
-function PageTurner({ currentPage, changePage }) {
-  console.log(currentPage);
-  // const [formData, setFormData] = useState(null);
-  /** onSubmit -> submit page number. Calls parent function */
-  // function handleSubmit(evt) {
-  //   evt.preventDefault();
-  //   // const { name, value } = evt.target;
-  //   console.log("event", evt);
-  //   // console.log("handleSubmitValue",value)
+function PageTurner({ currentPage, changePage, numItems }) {
 
-  //   changePage(1);
-  // }
+  const itemsPerPage = 20;
+  const lastPage = Math.ceil(numItems / itemsPerPage);
+
+  console.log('current Page', currentPage);
+  console.log('last Page: ', lastPage);
+  console.log('items per Page', itemsPerPage);
+
+
+  /** Handles button clicks */
+  function handleClick(evt) {
+    const { value } = evt.target;
+    const nextPage = value === 'back' ? currentPage - 1 : currentPage + 1;
+    changePage(nextPage);
+
+  }
 
   return (
-    <div>
-      <button onClick={changePage(currentPage-1)}>
-        Back
+    <div className='PageTurner'>
+
+      <button className='btn back-btn' value={'back'} onClick={handleClick} disabled={currentPage <= 1}>
+        -
       </button>
-      <p>{currentPage}</p>
-      <button onClick={changePage(currentPage-1)}>
-        Forward
+      <p> {`${currentPage} / ${lastPage}`} </p>
+      <button className='btn forward-btn' value={'forward'} onClick={handleClick} disabled={currentPage >= lastPage}>
+        +
       </button>
-    </div>
+    </div >
 
   );
 }

@@ -19,9 +19,14 @@ import PageTurner from "./PageTurner";
 
 function CompanyList() {
   const [companies, setCompanies] = useState(null);
-  const [displayedCompanies, setDisplayedCompanies] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [pageNumber, setPageNumber] = useState(null);
+  const [page, setPage] = useState(null);
+
+  const displayedCompanies = (companies
+    ? companies.slice((page - 1) * 20, page * 20)
+    : null
+  );
+
 
   console.log('CompanyList:', companies);
   console.log("displayCompanies", displayedCompanies);
@@ -35,19 +40,11 @@ function CompanyList() {
         ? await JoblyApi.filterCompanies(searchTerm)
         : await JoblyApi.getAllCompanies();
       setCompanies(searchResults);
-      setPageNumber(1);
+      setPage(1);
     }
     getCompanies();
 
   }, [searchTerm]);
-
-  /**Triggered when page number changes */
-  useEffect(function displayCompaniesOnMount() {
-    if (companies) {
-      setDisplayedCompanies(companies.slice(pageNumber - 1, pageNumber * 20));
-    }
-  }
-    , [pageNumber]);
 
   /** Search function passed to SearchBar
    * Accepts: String
@@ -56,8 +53,12 @@ function CompanyList() {
     console.log('Set Search Term: ', term);
     setSearchTerm(term);
   }
-  function changePage(page) {
-    setPageNumber(page);
+
+  /** Update current Page, passed to PageTurner
+   * Accepts: integer
+   */
+  function changePage(nextPage) {
+    setPage(nextPage);
   }
 
   if (!displayedCompanies) return <h1>Loading...</h1>;
@@ -66,7 +67,8 @@ function CompanyList() {
     <div className="CompanyList">
       CompanyList
       <SearchBar search={search} />
-      <PageTurner currentPage={pageNumber} changePage={changePage} />
+      <PageTurner currentPage={page} numItems={companies.length} changePage={changePage} />
+
       {displayedCompanies.length
         ? <CompanyCardList displayedCompanies={displayedCompanies} />
         : <p>Sorry, no results were found!!</p>}
