@@ -5,6 +5,7 @@ a {
 
 li:first-child {
   float: left;
+  padding-left:20px;
 }
 
 li:not(:first-child) {

@@ -16,7 +16,7 @@ import JobCardList from "./JobCardList";
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
   console.log("setCompany", company);
-  
+
   const { handle } = useParams();
   const navigate = useNavigate();
 
@@ -29,7 +29,6 @@ function CompanyDetail() {
       } catch (error) {
         navigate("/companies");
       }
-
     }
     getCompany();
   }, [handle]);
