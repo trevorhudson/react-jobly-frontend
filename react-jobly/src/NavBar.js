@@ -12,26 +12,29 @@ import userContext from "./user-context";
  * App=>NavBar
 */
 
-function NavBar() {
-  const { username } = useContext(userContext);
+function NavBar({ logout }) {
+  const { currentUser } = useContext(userContext);
 
-  /** Check if logged in -> show companies/jobs/profile/logout */
+  async function handleLogout() {
+    await logout();
+  }
 
-  /** else show login/signup  */
+
 
   return (
     <div className="NavBar">
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>
         <NavLink className='navbar-brand fw-bold' to="/">Jobly</NavLink>
 
-        {username &&
+        {currentUser &&
           <ul className="navbar-nav">
             <li className='nav-item'><NavLink className='nav-link' to="/companies">Companies</NavLink></li>
             <li className='nav-item'><NavLink className='nav-link' to="/jobs">Jobs</NavLink></li>
+            <li className='nav-item'><button className='btn btn-primary' onClick={handleLogout}>Logout</button></li>
           </ul>
         }
 
-        {!username &&
+        {!currentUser &&
           <ul className="navbar-nav">
             <li className='nav-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
             <li className='nav-item'><NavLink className='nav-link' to="/signup">Signup</NavLink></li>
@@ -40,8 +43,6 @@ function NavBar() {
       </nav>
 
     </div>
-
-
 
   );
 }

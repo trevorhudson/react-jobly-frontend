@@ -1,11 +1,17 @@
-import { BrowserRouter } from 'react-router-dom';
-import './App.css';
-import RoutesList from './RoutesList';
-import NavBar from './NavBar';
 import React, { useEffect, useState, useContext } from 'react';
+import { BrowserRouter } from "react-router-dom";
+
+import useLocalStorage from "./useLocalStorage";
+
+import NavBar from './NavBar';
+import RoutesList from './RoutesList';
 import JoblyApi from './api';
 import userContext from "./user-context";
 import decode from 'jwt-decode';
+export const TOKEN_STORAGE_ID = "jobly-token";
+
+
+
 
 /** App for searching and applying for jobs
  * props: none
@@ -16,7 +22,8 @@ import decode from 'jwt-decode';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ isLoaded: false, data: null });
-  const [token, setToken] = useState(null); // local storage
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  // const [token, setToken] = useState(null);
 
   console.log("currentUser", currentUser);
   console.log("token", token);
@@ -68,8 +75,11 @@ function App() {
   /** logout */
   function logout() {
     console.log("logout");
-
     setToken(null);
+    setCurrentUser({
+      isLoaded: true,
+      data: null
+    });
     // setCurrentUser(is);
   }
 
@@ -82,17 +92,22 @@ function App() {
   // IF LOADING -> return <h1> Loading </h1>
   if (!currentUser.isLoaded) return <h1>Loading...</h1>;
 
-
   return (
-    <div className="App">
-      <userContext.Provider value={currentUser}>
-        <BrowserRouter>
-          <NavBar />
-          <RoutesList currentUser={currentUser.data} login={login} signup={signup} logout={logout} />
-        </BrowserRouter>
+
+    <BrowserRouter>
+      <userContext.Provider
+        value={{
+          currentUser: currentUser.data
+        }}
+      >
+
+        <div className="App">
+          <NavBar logout={logout} />
+          <RoutesList currentUser={currentUser.data} login={login} signup={signup} />
+        </div>
+
       </userContext.Provider>
-    </div>
+    </BrowserRouter >
   );
 }
-
 export default App;

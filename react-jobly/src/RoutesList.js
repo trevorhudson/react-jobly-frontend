@@ -21,7 +21,6 @@ function RoutesList({ login, signup, update, currentUser }) {
     <div className='RoutesList'>
       <Routes>
 
-
         {/* Unauthorized Routes  */}
         {!currentUser &&
           <>
