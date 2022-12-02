@@ -13,18 +13,40 @@ import SignupForm from './SignupForm';
  * App=>RoutesList
  */
 
-function RoutesList({ login, signup, logout, update }) {
+function RoutesList({ login, signup, update, currentUser }) {
+  console.debug('Routes', 'currentUser: ', currentUser);
+
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={<CompanyList />} />
-      <Route path="/companies/:handle" element={<CompanyDetail />} />
-      <Route path="/jobs" element={<JobList />} />
-      <Route path="/login" element={<LoginForm login={login} />} />
-      <Route path="/signup" element={<SignupForm signup={signup} />} />
-      <Route path="/profile" element={<ProfileForm update={update} />} />
-      <Route path="*" element={<Navigate to='/' />} />
-    </Routes>
+
+    <div className='RoutesList'>
+      <Routes>
+
+
+        {/* Unauthorized Routes  */}
+        {!currentUser &&
+          <>
+            <Route path="/login" element={<LoginForm login={login} />} />
+            <Route path="/signup" element={<SignupForm signup={signup} />} />
+          </>
+        }
+
+        <Route path="/" element={<Homepage />} />
+
+        {/* Authorized Routes  */}
+        {currentUser &&
+          <>
+            <Route path="/companies" element={<CompanyList />} />
+            <Route path="/companies/:handle" element={<CompanyDetail />} />
+            <Route path="/jobs" element={<JobList />} />
+            <Route path="/profile" element={<ProfileForm update={update} />} />
+          </>
+        }
+
+        {/* All auth */}
+        <Route path="*" element={<Navigate to='/' />} />
+
+      </Routes >
+    </div>
   );
 };
 

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 /** Renders login form
  * props: callback fn setCurrentUser
@@ -9,6 +11,9 @@ import { useState } from 'react';
 function LoginForm({ login }) {
 
   const [formData, setFormData] = useState(null);
+
+  const navigate = useNavigate();
+
   console.log('searchBar field: ', formData);
 
 
@@ -25,17 +30,29 @@ function LoginForm({ login }) {
 
 
   /** onSubmit -> submit search terms. Calls parent function */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
+
+    try {
+      console.log('about to login');
+      await login(formData);
+      console.log('Post login, route to /companies');
+      navigate('/companies');
+      console.log('Post NAVIGATE, route to /companies');
+    }
+
+    catch (err) {
+      // handle form errors
+    }
+
   }
 
   return (
     <div className='RegisterForm'>
       <form className='form' onSubmit={handleSubmit} >
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input type='text' name="username" className='form-control' onChange={handleChange}></input>
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input type='text' name="password" className='form-control' onChange={handleChange}></input>
         <button className='btn btn-primary mb-2' >Submit</button>
       </form>

@@ -14,9 +14,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -72,26 +70,26 @@ class JoblyApi {
 
   /**Register user and obtain JWT */
   static async registerUser(data) {
-    const res = await this.request('/auth/register', data, "post");
+    const res = await this.request('auth/register', data, "post");
     return res.token;
   }
 
   /**Login and obtain JWT */
   static async loginUser(data) {
-    const res = await this.request('/auth/token', data, "post");
+    const res = await this.request('auth/token', data, "post");
     return res.token;
   }
 
   /**Update user profile */
   static async updateUser(data) {
-    const res = await this.request(`user/${data.username}`, data, "patch");
+    const res = await this.request(`users/${data.username}`, data, "patch");
     return res.user;
   }
 
   /**Get user information */
   static async getUserData(username) {
-    const res = await this.request(`user/${username}`);
-    return res
+    const res = await this.request(`users/${username}`);
+    return res;
   }
 }
 

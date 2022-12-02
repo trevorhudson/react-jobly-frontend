@@ -4,7 +4,8 @@ import RoutesList from './RoutesList';
 import NavBar from './NavBar';
 import React, { useEffect, useState, useContext } from 'react';
 import JoblyApi from './api';
-import userContext from "./userContext";
+import userContext from "./user-context";
+import decode from 'jwt-decode';
 
 /** App for searching and applying for jobs
  * props: none
@@ -14,18 +15,34 @@ import userContext from "./userContext";
 */
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
-  const [token, setToken] = useState();
-
+  const [currentUser, setCurrentUser] = useState({ isLoaded: false, data: null });
+  const [token, setToken] = useState(null); // local storage
 
   console.log("currentUser", currentUser);
   console.log("token", token);
 
   useEffect(function getCurrentUserData() {
+    console.log('useEffect triggered');
     async function getData() {
-      JoblyApi.token = token;
-      const user = await JoblyApi.getUserData(currentUser.username);
-      setCurrentUser(currentUser => ({ ...user }));
+
+      if (token) {
+        try {
+          console.log('useEffect try block');
+          const { username } = decode(token);
+          JoblyApi.token = token;
+          const { user } = await JoblyApi.getUserData(username);
+          setCurrentUser({ isLoaded: true, data: user }); // SET LOADING TO FALSE
+        }
+        catch {
+          console.log('useEffect catch error block');
+          setCurrentUser({ isLoaded: true, data: null });
+        }
+      }
+
+      else {
+        setCurrentUser({ isLoaded: true, data: null });
+      }
+
     }
     getData();
   }, [token]);
@@ -34,22 +51,18 @@ function App() {
   async function login(data) {
     console.log("login", data);
 
-    const token = JoblyApi.login(data);
-    const { username } = data.username;
-
+    const token = await JoblyApi.loginUser(data);
     setToken(token);
-    setCurrentUser({ username });
   }
+
 
   /** signup */
   async function signup(data) {
     console.log("signup", data);
 
-    const token = JoblyApi.registerUser(data);
-    const { username } = data.username;
+    const token = await JoblyApi.registerUser(data);
 
     setToken(token);
-    setCurrentUser({ username });
   }
 
   /** logout */
@@ -57,7 +70,7 @@ function App() {
     console.log("logout");
 
     setToken(null);
-    setCurrentUser(null);
+    // setCurrentUser(is);
   }
 
   /** updateUser */
@@ -66,12 +79,16 @@ function App() {
   }
 
 
+  // IF LOADING -> return <h1> Loading </h1>
+  if (!currentUser.isLoaded) return <h1>Loading...</h1>;
+
+
   return (
     <div className="App">
       <userContext.Provider value={currentUser}>
         <BrowserRouter>
           <NavBar />
-          <RoutesList />
+          <RoutesList currentUser={currentUser.data} login={login} signup={signup} logout={logout} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

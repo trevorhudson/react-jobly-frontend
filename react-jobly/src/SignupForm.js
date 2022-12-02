@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 /** Renders registration form
  * props: callback fn setCurrentUser
@@ -8,8 +9,8 @@ import { useState } from 'react';
 
 function RegisterForm({ signup }) {
 
-
   const [formData, setFormData] = useState(null);
+  const navigate = useNavigate();
   console.log('searchBar field: ', formData);
 
 
@@ -26,24 +27,31 @@ function RegisterForm({ signup }) {
 
 
   /** onSubmit -> submit search terms. Calls parent function */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
+    try {
+      await signup(formData);
+      navigate('/companies');
+    }
+    catch (err) {
+      // handle form errors
+    }
   }
 
   return (
     <div className='RegisterForm'>
       <form className='form' onSubmit={handleSubmit} >
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input name="username" className='form-control' onChange={handleChange}></input>
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input name="password" className='form-control' onChange={handleChange}></input>
-        <label for="firstname">FirstName</label>
-        <input name="firstname" className='form-control' onChange={handleChange}></input>
-        <label for="lastname">LastName</label><input name="lastname"></input>
-        <label for="email">Email</label>
+        <label htmlFor="firstname">FirstName</label>
+        <input name="firstName" className='form-control' onChange={handleChange}></input>
+        <label htmlFor="lastname">LastName</label>
+        <input name="lastName" className='form-control' onChange={handleChange}></input>
+        <label htmlFor="email">Email</label>
         <input name="email" className='form-control' onChange={handleChange}></input>
-        <button btn btn-primary mb-2 >Submit</button>
+        <button className='btn btn-primary mb-2' >Submit</button>
       </form>
     </div>
   );

@@ -35,13 +35,13 @@ function ProfileForm({ updateUser }) {
   return (
     <div className='RegisterForm'>
       <form className='form' onSubmit={handleSubmit} >
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input name="username" className='form-control' onChange={handleChange}></input>
-        <label for="firstname">FirstName</label>
+        <label htmlFor="firstname">FirstName</label>
         <input name="firstname" className='form-control' onChange={handleChange}></input>
-        <label for="lastname">LastName</label>
+        <label htmlFor="lastname">LastName</label>
         <input name="lastname" className='form-control' onChange={handleChange}></input>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input name="email" className='form-control' onChange={handleChange}></input>
         <button className='btn btn-primary mb-2'>Submit</button>
       </form>
