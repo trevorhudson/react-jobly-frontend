@@ -11,11 +11,15 @@ import decode from 'jwt-decode';
 export const TOKEN_STORAGE_ID = "jobly-token";
 
 
-
-//TODO: State data state
-/** App for searching and applying for jobs
+/** App for searching and applying for jobs.
  * props: none
- * state: userData
+ * state:
+ * 1. currentUser = Keeps track of the current user.
+ * currentUser status determines access to certain routes.
+ * { isLoaded: false, data: {username: test, firstName: test, lastName: test, email: test} },
+ * 2. jwt = Given a jwt from the backend after registration/login and used as a means
+ * of authentication when making future requests. Handled using personalized hook
+ * useLocalStorage.
  *
  * App -> NavBar, RoutesList
 */
@@ -23,7 +27,6 @@ export const TOKEN_STORAGE_ID = "jobly-token";
 function App() {
   const [currentUser, setCurrentUser] = useState({ isLoaded: false, data: null });
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
-  // const [token, setToken] = useState(token);
 
   console.log("currentUser", currentUser);
   console.log("token", token);
@@ -38,7 +41,7 @@ function App() {
           const { username } = decode(token);
           JoblyApi.token = token;
           const { user } = await JoblyApi.getUserData(username);
-          setCurrentUser({ isLoaded: true, data: user }); // SET LOADING TO FALSE
+          setCurrentUser({ isLoaded: true, data: user });
         }
         catch {
           console.log('useEffect catch error block');
@@ -66,9 +69,7 @@ function App() {
   /** signup */
   async function signup(data) {
     console.log("signup", data);
-
     const token = await JoblyApi.registerUser(data);
-
     setToken(token);
   }
 
@@ -76,25 +77,19 @@ function App() {
   function logout() {
     console.log("logout");
     setToken(null);
-    // setCurrentUser({ // redundant
-    //   isLoaded: true,
-    //   data: null
-    // });
-    // setCurrentUser(is);
   }
 
   /** updateUser */
-  // update res name
   async function updateUser(data, username) {
-    const res = await JoblyApi.updateUser(data, username);
+    const user = await JoblyApi.updateUser(data, username);
     setCurrentUser({
       isLoaded: true,
-      data: res
+      data: user
     });
   }
 
 
-  // IF LOADING -> return <h1> Loading </h1>
+  /** If there is current user is not loaded yet render loading... */
   if (!currentUser.isLoaded) return <h1>Loading...</h1>;
 
   return (

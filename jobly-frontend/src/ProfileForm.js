@@ -15,6 +15,7 @@ function ProfileForm({ update }) {
     lastName: currentUser.lastName,
     email: currentUser.email,
   });
+  const [errors, setErrors] = useState(null);
   console.log('searchBar field: ', formData);
   console.log("currentUser", currentUser);
 
@@ -39,6 +40,7 @@ function ProfileForm({ update }) {
       await update(formData, currentUser.username);
       navigate("/");
     } catch (err) {
+      setErrors(err);
       console.log(err);
     }
 
@@ -52,20 +54,21 @@ function ProfileForm({ update }) {
         <div className='card'>
           <div className='card-body'>
             <form className='form' onSubmit={handleSubmit} >
-              <div class="mb-3"><label htmlFor="username">Username</label>
+              {errors && errors.map(error => (<div key={error} className="alert alert-danger" role="alert">{error}</div>))}
+              <div className="mb-3"><label htmlFor="username">Username</label>
                 <input name="username" value={currentUser.username}
                   disabled="disabled" className='form-control'
                   onChange={handleChange}></input></div>
-              <div class="mb-3"><label htmlFor="firstName">FirstName</label>
+              <div className="mb-3"><label htmlFor="firstName">FirstName</label>
                 <input name="firstName" value={formData.firstName}
                   className='form-control' onChange={handleChange}></input></div>
-              <div class="mb-3"><label htmlFor="lastName">LastName</label>
+              <div className="mb-3"><label htmlFor="lastName">LastName</label>
                 <input name="lastName" value={formData.lastName}
                   className='form-control' onChange={handleChange}></input></div>
-              <div class="mb-3"><label htmlFor="email">Email</label>
+              <div className="mb-3"><label htmlFor="email">Email</label>
                 <input name="email" value={formData.email}
                   className='form-control' onChange={handleChange}></input></div>
-              <div class="d-grid"> <button className='btn btn-primary mb-2'>
+              <div className="d-grid"> <button className='btn btn-primary mb-2'>
                 Submit</button></div>
             </form>
           </div>
