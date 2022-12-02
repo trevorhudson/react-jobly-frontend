@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
 
 /** Renders details per company handle
- * - props: none
+ * - props: Apply -> callback function to apply for a job
  * - state:
  *    - company {handle, name, description,numEmployees,jobs:[job1, ...]}
  *    - isLoading = (true/false)
@@ -13,7 +13,7 @@ import JobCardList from "./JobCardList";
  * App -> RoutesList -> CompanyDetail
 */
 
-function CompanyDetail() {
+function CompanyDetail({ apply }) {
   const [company, setCompany] = useState(null);
   console.log("setCompany", company);
 
@@ -42,7 +42,7 @@ function CompanyDetail() {
         <>
           <h4 className='card-title'>{company.name}</h4>
           <p className='card-text'>{company.description}</p>
-          <JobCardList jobs={company.jobs} />
+          <JobCardList apply={apply} jobs={company.jobs} />
         </> :
         <p>Company doesn't exist!!</p>
       }

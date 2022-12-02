@@ -10,13 +10,13 @@ import PageTurner from "./PageTurner";
 /**
  * Renders job list page
  *
- * - props: none
+ * - props: apply -> callback funciton to apply for a job
  * - state: Complete list of jobs from the API [....job1]
  *
  * App -> RoutesList -> JobList
 */
 
-function JobList() {
+function JobList({ apply }) {
   const [jobs, setJobs] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(null);
@@ -27,8 +27,8 @@ function JobList() {
   );
 
 
-  console.log('JobsList: ', jobs);
-  console.log('Displayed JobsList: ', displayedJobs);
+  // console.log('JobsList: ', jobs);
+  // console.log('Displayed JobsList: ', displayedJobs);
 
   /** Triggered on mount, and re-render */
   useEffect(function getJobsOnMount() {
@@ -71,7 +71,7 @@ function JobList() {
       <PageTurner currentPage={page} numItems={jobs.length} changePage={changePage} />
 
       {displayedJobs.length
-        ? <JobCardList jobs={displayedJobs} />
+        ? <JobCardList apply={apply} jobs={displayedJobs} />
         : <p>Sorry, no results were found!!</p>}
     </div>
   );

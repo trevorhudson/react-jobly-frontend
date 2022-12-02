@@ -10,7 +10,14 @@ function PageTurner({ currentPage, changePage, numItems }) {
 
   const itemsPerPage = 20;
   const lastPage = Math.ceil(numItems / itemsPerPage);
+
   const pageNumbers = [...Array(lastPage + 1).keys()].slice(1);
+  const displayedPages = pageNumbers.slice(currentPage > 5 ? currentPage - 5 : 0, currentPage > 5 ? currentPage + 5 : 10);
+
+
+
+  // const pageNumbers = [...Array(10)].map((_, i) => currentPage + i * 1);
+
 
   /** Return to the previous page */
   function prevPage() {
@@ -42,7 +49,7 @@ function PageTurner({ currentPage, changePage, numItems }) {
           <a className='page-link' onClick={prevPage} href='#'> {'<'} </a>
         </li>
 
-        {pageNumbers.map(pg => (
+        {displayedPages.map(pg => (
           <li className='page-item' key={pg}>
             <a className='page-link' value={pg} onClick={() => setCurrentPage(pg)} href='#'> {pg} </a>
           </li>)

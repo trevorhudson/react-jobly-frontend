@@ -17,7 +17,7 @@ import userContext from "./user-context";
  * App=>RoutesList
  */
 // TODO: Get currentUser from context
-function RoutesList({ login, signup, update }) {
+function RoutesList({ login, signup, update, apply }) {
   const { currentUser } = useContext(userContext);
   return (
 
@@ -38,8 +38,8 @@ function RoutesList({ login, signup, update }) {
         {currentUser &&
           <>
             <Route path="/companies" element={<CompanyList />} />
-            <Route path="/companies/:handle" element={<CompanyDetail />} />
-            <Route path="/jobs" element={<JobList />} />
+            <Route path="/companies/:handle" element={<CompanyDetail apply={apply} />} />
+            <Route path="/jobs" element={<JobList apply={apply} />} />
             <Route path="/profile" element={<ProfileForm update={update} />} />
           </>
         }

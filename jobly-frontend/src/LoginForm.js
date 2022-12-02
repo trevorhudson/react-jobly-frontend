@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
  */
 
 function LoginForm({ login }) {
-
   const [formData, setFormData] = useState(null);
 
   const navigate = useNavigate();
+
+  const [errors, setErrors] = useState(null);
 
   console.log('searchBar field: ', formData);
 
@@ -42,7 +43,8 @@ function LoginForm({ login }) {
     }
 
     catch (err) {
-      // handle form errors
+      setErrors(err);
+      console.log(err);
     }
 
   }
@@ -54,6 +56,7 @@ function LoginForm({ login }) {
         <h3>Login</h3>
         <div className='card'>
           <div className='card-body'>
+            {errors && errors.map(error => (<div key={error} className="alert alert-danger" role="alert">{error}</div>))}
 
             <form onSubmit={handleSubmit} >
 

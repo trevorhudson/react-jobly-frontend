@@ -11,6 +11,8 @@ function RegisterForm({ signup }) {
 
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
+  const [errors, setErrors] = useState(null);
+
   console.log('searchBar field: ', formData);
 
 
@@ -34,7 +36,8 @@ function RegisterForm({ signup }) {
       navigate('/companies');
     }
     catch (err) {
-      // handle form errors
+      setErrors(err);
+      console.log(err);
     }
   }
 
@@ -45,6 +48,8 @@ function RegisterForm({ signup }) {
 
         <div className='card'>
           <div className='card-body'>
+            {errors && errors.map(error => (<div key={error} className="alert alert-danger" role="alert">{error}</div>))}
+
 
             <form onSubmit={handleSubmit} >
 

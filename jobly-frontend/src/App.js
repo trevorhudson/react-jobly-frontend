@@ -16,7 +16,7 @@ export const TOKEN_STORAGE_ID = "jobly-token";
  * state:
  * 1. currentUser = Keeps track of the current user.
  * currentUser status determines access to certain routes.
- * { isLoaded: false, data: {username: test, firstName: test, lastName: test, email: test} },
+ * { isLoaded: false, data: {username: test, firstName: test, lastName: test, email: test, jobs:} },
  * 2. jwt = Given a jwt from the backend after registration/login and used as a means
  * of authentication when making future requests. Handled using personalized hook
  * useLocalStorage.
@@ -88,6 +88,16 @@ function App() {
     });
   }
 
+  /** applyToJob */
+  async function applyToJob(jobId, username) {
+    await JoblyApi.applyToJob(jobId, username);
+    setCurrentUser(user => {
+      user.data.applications.push(jobId);
+      return { ...user };
+    });
+
+  }
+
 
   /** If there is current user is not loaded yet render loading... */
   if (!currentUser.isLoaded) return <h1>Loading...</h1>;
@@ -103,7 +113,7 @@ function App() {
 
         <div className="App">
           <NavBar logout={logout} />
-          <RoutesList login={login} signup={signup} update={updateUser} />
+          <RoutesList login={login} signup={signup} update={updateUser} apply={applyToJob} />
         </div>
 
       </userContext.Provider>
