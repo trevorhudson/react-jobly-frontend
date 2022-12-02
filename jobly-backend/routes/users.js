@@ -32,7 +32,7 @@ router.post("/", ensureAdmin, async function (req, res, next) {
     const validator = jsonschema.validate(
       req.body,
       userNewSchema,
-      {required: true}
+      { required: true }
     );
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
@@ -98,7 +98,7 @@ router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, n
     const validator = jsonschema.validate(
       req.body,
       userUpdateSchema,
-      {required: true}
+      { required: true }
     );
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
@@ -135,7 +135,7 @@ router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, 
  * Authorization required: admin or same-user-as-:username
  * */
 
-router.post("/:username/jobs/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.post("x", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const jobId = +req.params.id;
     await User.applyToJob(req.params.username, jobId);
