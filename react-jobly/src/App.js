@@ -84,8 +84,12 @@ function App() {
   }
 
   /** updateUser */
-  function updateUser(data) {
-
+  async function updateUser(data, username) {
+    const res = await JoblyApi.updateUser(data, username);
+    setCurrentUser({
+      isLoaded: true,
+      data: res
+    });
   }
 
 
@@ -103,7 +107,7 @@ function App() {
 
         <div className="App">
           <NavBar logout={logout} />
-          <RoutesList currentUser={currentUser.data} login={login} signup={signup} />
+          <RoutesList currentUser={currentUser.data} login={login} signup={signup} update={updateUser} />
         </div>
 
       </userContext.Provider>

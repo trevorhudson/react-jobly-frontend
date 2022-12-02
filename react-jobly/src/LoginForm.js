@@ -64,7 +64,7 @@ function LoginForm({ login }) {
 
               <div className='mb-3'>
                 <label htmlFor="password">Password</label>
-                <input type='text' name="password" className='form-control' onChange={handleChange}></input>
+                <input type='password' name="password" className='form-control' onChange={handleChange}></input>
               </div>
 
               <div className='d-grid'>
