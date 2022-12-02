@@ -93,6 +93,7 @@ function App() {
     await JoblyApi.applyToJob(jobId, username);
     setCurrentUser(user => {
       user.data.applications.push(jobId);
+
       return { ...user };
     });
 
