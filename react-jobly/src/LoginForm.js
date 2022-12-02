@@ -48,14 +48,32 @@ function LoginForm({ login }) {
   }
 
   return (
-    <div className='RegisterForm'>
-      <form className='form' onSubmit={handleSubmit} >
-        <label htmlFor="username">Username</label>
-        <input type='text' name="username" className='form-control' onChange={handleChange}></input>
-        <label htmlFor="password">Password</label>
-        <input type='text' name="password" className='form-control' onChange={handleChange}></input>
-        <button className='btn btn-primary mb-2' >Submit</button>
-      </form>
+    <div className='LoginForm'>
+      <div className='container col-md-3 offset-md-3 col-lg-6 offset-lg-3' >
+
+        <h3>Login</h3>
+        <div className='card'>
+          <div className='card-body'>
+
+            <form onSubmit={handleSubmit} >
+
+              <div className='mb-3'>
+                <label htmlFor="username">Username</label>
+                <input type='text' name="username" className='form-control' onChange={handleChange}></input>
+              </div>
+
+              <div className='mb-3'>
+                <label htmlFor="password">Password</label>
+                <input type='text' name="password" className='form-control' onChange={handleChange}></input>
+              </div>
+
+              <div className='d-grid'>
+                <button className='btn btn-primary' >Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

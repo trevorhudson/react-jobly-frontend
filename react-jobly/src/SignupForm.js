@@ -40,21 +40,44 @@ function RegisterForm({ signup }) {
 
   return (
     <div className='RegisterForm'>
-      <form className='form' onSubmit={handleSubmit} >
-        <label htmlFor="username">Username</label>
-        <input name="username" className='form-control' onChange={handleChange}></input>
-        <label htmlFor="password">Password</label>
-        <input name="password" className='form-control' onChange={handleChange}></input>
-        <label htmlFor="firstname">FirstName</label>
-        <input name="firstName" className='form-control' onChange={handleChange}></input>
-        <label htmlFor="lastname">LastName</label>
-        <input name="lastName" className='form-control' onChange={handleChange}></input>
-        <label htmlFor="email">Email</label>
-        <input name="email" className='form-control' onChange={handleChange}></input>
-        <button className='btn btn-primary mb-2' >Submit</button>
-      </form>
+      <div className='container col-md-6 offset-md-3 col-lg-6 offset-lg-3' >
+        <h3>Signup</h3>
+
+        <div className='card'>
+          <div className='card-body'>
+
+            <form onSubmit={handleSubmit} >
+
+
+              <div className='mb-3'>
+                <label htmlFor="username">Username</label>
+                <input name="username" className='form-control' onChange={handleChange}></input>
+              </div>
+              <div className='mb-3'>
+                <label htmlFor="password">Password</label>
+                <input name="password" className='form-control' onChange={handleChange}></input>
+              </div>
+              <div className='mb-3'>
+                <label htmlFor="firstname">FirstName</label>
+                <input name="firstName" className='form-control' onChange={handleChange}></input>
+              </div>
+              <div className='mb-3'>
+                <label htmlFor="lastname">LastName</label>
+                <input name="lastName" className='form-control' onChange={handleChange}></input>
+              </div>
+              <div className='mb-3'>
+                <label htmlFor="email">Email</label>
+                <input name="email" className='form-control' onChange={handleChange}></input>
+              </div>
+              <div className='d-grid'>
+                <button className='btn btn-primary mb-2' >Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default RegisterForm;
+export default RegisterForm;;
