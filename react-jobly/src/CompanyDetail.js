@@ -36,13 +36,14 @@ function CompanyDetail() {
   if (!company) return <h1>Loading...</h1>;
 
   return (
-    <div className="CompanyDetail">
+    <div className="CompanyDetail ">
+
       {company ?
-        <div>
-          <h4>{company.name}</h4>
-          <p>{company.description}</p>
+        <>
+          <h4 className='card-title'>{company.name}</h4>
+          <p className='card-text'>{company.description}</p>
           <JobCardList jobs={company.jobs} />
-        </div> :
+        </> :
         <p>Company doesn't exist!!</p>
       }
 

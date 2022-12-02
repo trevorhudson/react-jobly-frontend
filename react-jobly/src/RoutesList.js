@@ -18,7 +18,7 @@ function RoutesList({ login, signup, update, currentUser }) {
 
   return (
 
-    <div className='RoutesList'>
+    <div className='RoutesList col-md-8 offset-md-2'>
       <Routes>
 
         {/* Unauthorized Routes  */}

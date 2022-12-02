@@ -23,23 +23,25 @@ function NavBar({ logout }) {
 
   return (
     <div className="NavBar">
-      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-        <NavLink className='navbar-brand fw-bold' to="/">Jobly</NavLink>
+      <nav className='navbar navbar-expand-md navbar-light bg-light'>
+        <div className='container-fluid'>
+          <NavLink className='navbar-brand fw-bold' to="/">Jobly</NavLink>
 
-        {currentUser &&
-          <ul className="navbar-nav">
-            <li className='nav-item'><NavLink className='nav-link' to="/companies">Companies</NavLink></li>
-            <li className='nav-item'><NavLink className='nav-link' to="/jobs">Jobs</NavLink></li>
-            <li className='nav-item'><button className='btn btn-primary' onClick={handleLogout}>Logout</button></li>
-          </ul>
-        }
 
-        {!currentUser &&
-          <ul className="navbar-nav">
-            <li className='nav-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
-            <li className='nav-item'><NavLink className='nav-link' to="/signup">Signup</NavLink></li>
-          </ul>}
+          {currentUser &&
+            <ul className="navbar-nav">
+              <li className='nav-item'><NavLink className='nav-link' to="/companies">Companies</NavLink></li>
+              <li className='nav-item'><NavLink className='nav-link' to="/jobs">Jobs</NavLink></li>
+              <li className='nav-item'><NavLink className='nav-link' onClick={handleLogout}>Logout {currentUser.username}</NavLink></li>
+            </ul>
+          }
 
+          {!currentUser &&
+            <ul className="navbar-nav">
+              <li className='nav-item'><NavLink className='nav-link' to="/login">Login</NavLink></li>
+              <li className='nav-item'><NavLink className='nav-link' to="/signup">Signup</NavLink></li>
+            </ul>}
+        </div>
       </nav>
 
     </div>

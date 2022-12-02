@@ -67,10 +67,13 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchBar search={search} />
-      <PageTurner currentPage={page} numItems={companies.length} changePage={changePage} />
+      <div className='flex'>
+        <SearchBar search={search} />
+        <PageTurner currentPage={page} numItems={companies.length} changePage={changePage} />
+      </div>
 
       {displayedCompanies.length
+
         ? <CompanyCardList displayedCompanies={displayedCompanies} />
         : <p>Sorry, no results were found!!</p>}
 
@@ -78,4 +81,4 @@ function CompanyList() {
   );
 };
 
-export default CompanyList;
+export default CompanyList;;

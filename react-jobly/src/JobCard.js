@@ -1,4 +1,4 @@
-
+import './JobCard.css';
 /** Renders a single Job Card
  *
  * - Props: job like
@@ -19,14 +19,21 @@ function JobCard({ job }) {
   // console.log('JobCard', JobCard);
 
   return (
-    <div className='JobCard card'>
-      <div className='card-body'>
-        <h6>{job.title}</h6>
-        <p>{job.companyName}</p>
-        <div> <small> Salary: {job.salary} </small></div>
-        <div> <small> Equity: {job.equity} </small></div>
+    <div className='JobCard'>
+
+      <div className='card'>
+
+        <div className='card-body'>
+          <h6 className='card-title'>{job.title}</h6>
+          <p>{job.companyName}</p>
+
+          <div> <small> Salary: {job.salary} </small></div>
+          <div> <small> Equity: {job.equity} </small></div>
+        </div>
+
       </div>
-    </div>
+
+    </div >
   );
 
 
