@@ -8,8 +8,9 @@ import RoutesList from './RoutesList';
 import JoblyApi from './api';
 import userContext from "./user-context";
 import decode from 'jwt-decode';
-export const TOKEN_STORAGE_ID = "jobly-token";
+import BG_IMAGE from "./bg.jpg"
 
+export const TOKEN_STORAGE_ID = "jobly-token";
 
 /** App for searching and applying for jobs.
  * props: none
@@ -112,7 +113,8 @@ function App() {
         }}
       >
 
-        <div className="App">
+        <div className="App" style={{ backgroundImage:`url(${BG_IMAGE})`,backgroundSize:"cover",minHeight:1000
+    }}>
           <NavBar logout={logout} />
           <RoutesList login={login} signup={signup} update={updateUser} apply={applyToJob} />
         </div>

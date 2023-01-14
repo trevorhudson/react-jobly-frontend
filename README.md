@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# Jobly Backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Jobly is a full stack web application of a mock job board site where users can create an account and login. Logged in users can browse through a list of companies and/or jobs with the ability to filter the list using the search bar. Each company has a list of job openings that a user can view and/or apply to.
 
-## Available Scripts
+# Table of Contents
+1. [Features](#Features)
+2. [Tech stack](#Tech-stack)
+3. [Database Entity Relationships](#Database-entity-relationships)
+4. [Install](#Install)
+5. [Testing](#Testing)
+6. [Deployment](#Deployment)
+7. [Future features](#Future-features)
+8. [Contributers](#Contributers)
 
-In the project directory, you can run:
+## Features<a name="Features"></a>:
+* Utilizes RESTful API
+* Users must create an account to access the application. A valid email is not required, but passwords are hashed and authenticated using bcrypt.
+* Proper authorization checks are in place to ensure admin position can complete additional activities (ex. creating, updating, and deleting companies) and regular users cannot.
+* Users can browse through library of companies and/or jobs with the option to filter using the search bar.
+* "Apply" feature allows users to keep track of which jobs they have already applied for.
+* Users can update their profile, but cannot change their username.
+* Getting information on a user, updating, or deleting a user is only permitted by either an admin, or by that user.
 
-### `npm start`
+## Tech stack<a name="Tech-stack"></a>:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend:
+![alt text](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=for-the-badge)
+![alt text](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend ([GitHub Repo](https://github.com/amathew195/react-jobly)):
+![alt text](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 
-### `npm test`
+### Database Management:
+![alt text](https://img.shields.io/badge/-PostgresSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Database Entity Relationships<a name="Database-entity-relationships"></a>:
+![alt text](https://github.com/amathew195/express-jobly/blob/main/images/Jobly%20-%20Entity%20Relationship%20Diagram%20-%20Cropped.jpeg?raw=true)
 
-### `npm run build`
+## Install<a name="Install"></a>:
+To set up and load the database:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    createdb jobly < jobly.sql
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project uses Node.js for the back-end JavaScript runtime environment. To install the backend dependencies from the package.json file:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    npm install
 
-### `npm run eject`
+To start the server (port 3001):
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Testing<a name="Testing"></a>:
+To run the tests:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    jest -i
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Note: Any time you run our tests here, you will need to use the -i flag for Jest, so that the tests run “in band” (in order, not at the same time)
 
-## Learn More
+### Coverage Report:
+![alt text](https://github.com/amathew195/express-jobly/blob/main/images/Jobly%20Test%20Coverage.jpg?raw=true)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment<a name="Deployment"></a>:
+### Backend Deployment:
+We used ElephantSQL and Render to deploy our backend.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In ElephantSQL, create a 'Tiny Turtle' instance and copy the URL of your new instance.
 
-### Code Splitting
+Seed your database:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    pg_dump -O jobly | psql (url you copied here)
 
-### Analyzing the Bundle Size
+In Render, create a new instance of “Web service”.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Connect to your repository and give your instance a name, which must be globally unique.
 
-### Making a Progressive Web App
+Choose advanced, and enter environmental variables:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    DATABASE_URL: URL from ElephantSQL
 
-### Advanced Configuration
+    SECRET_KEY: anything you want
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Lastly select 'Create Web Service'
 
-### Deployment
+## Future features<a name="Future-features"></a>:
+* Dynamic live search
+* Add additional search filters to search by number of employees, industry, position
+* Have job application forms available for the user to submit
+* Allow users to upload resume
+* Allow status updates for job. For example, ‘interested’, ‘applied’, ‘accepted’, ‘rejected’
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributers<a name="Contributers"></a>:
+* Ashley Mathew
+* Jen Reuting
