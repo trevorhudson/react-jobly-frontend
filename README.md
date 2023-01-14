@@ -30,9 +30,6 @@ Jobly is a full featured job board with authentication. Users can browse and app
 ### Database Management:
 ![alt text](https://img.shields.io/badge/-PostgresSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)
 
-## React Component Hierarchy<a name="React-component-hierarchy"></a>:
-![alt text](https://github.com/amathew195/react-jobly/blob/main/public/Images/ReactComponentHierarchy.jpeg?raw=true)
-
 ## Install<a name="Install"></a>:
 
 This project uses Node.js for the back-end JavaScript runtime environment. To install the backend dependencies from the package.json file:
