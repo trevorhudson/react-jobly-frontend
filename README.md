@@ -6,8 +6,9 @@ Jobly is a full featured job board with authentication. Users can browse and app
 1. [Features](#Features)
 2. [Tech stack](#Tech-stack)
 3. [Install](#Install)
-4. [Deployment](#Deployment)
-5. [Future features](#Future-features)
+4. [Test](#Test)
+5. [Deployment](#Deployment)
+6. [Future features](#Future-features)
 
 ## Features<a name="Features"></a>:
 * Logged out users have the option to sign up for an account. Authentication is manged by the backend.
@@ -20,17 +21,21 @@ Jobly is a full featured job board with authentication. Users can browse and app
 
 ## Tech stack<a name="Tech-stack"></a>:
 
-### Backend ([GitHub Repo](https://github.com/amathew195/express-jobly)):
+### Backend ([GitHub Repo](https://github.com/trevorhudson/react-jobly-backend)):
 ![alt text](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=for-the-badge)
 ![alt text](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
 
-### Frontend:
+### Frontend ([GitHub Repo](https://github.com/trevorhudson/react-jobly-frontend)):
 ![alt text](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 
 ### Database Management:
 ![alt text](https://img.shields.io/badge/-PostgresSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)
 
 ## Install<a name="Install"></a>:
+
+To initialize and seed DB.
+
+    createdb jobly < jobly.sql
 
 This project uses Node.js for the back-end JavaScript runtime environment. To install the backend dependencies from the package.json file:
 
@@ -40,23 +45,28 @@ To start the sever (port 3000):
 
     npm start
 
+## Testing<a name="Testing"></a>:
+To run the tests:
+
+    jest -i
+
 ## Deployment<a name="Deployment"></a>:
+### Backend Deployment:
 
-### Frontend Deployment:
-We used Surge to deploy our front end.
+We used ElephantSQL and Render to deploy our backend.
 
-First make sure Surge is installed:
+Seed your remote database:
 
-    npm install -g surge
+    pg_dump -O jobly | psql (YOUR_DATABASE_URL)
 
-Next, let’s make sure we define the environment variable for our frontend app.
+In Render, create a new instance of “Web service”.
 
-    REACT_APP_BASE_URL=YOUR_RENDER_BACKEND_URL npm run build
+Choose advanced, and enter environmental variables:
 
-Now build your frontend.
+    DATABASE_URL: (YOUR_DATABASE_URL)
 
-    cp build/index.html build/200.html
-    surge build
+    SECRET_KEY: (anything)
+
 
 ## Future features<a name="Future-features"></a>:
 * Live search
