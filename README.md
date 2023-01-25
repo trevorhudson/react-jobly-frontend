@@ -5,10 +5,11 @@ Jobly is a full featured job board with authentication. Users can browse and app
 # Table of Contents
 1. [Features](#Features)
 2. [Tech stack](#Tech-stack)
-3. [Install](#Install)
-4. [Test](#Test)
-5. [Deployment](#Deployment)
-6. [Future features](#Future-features)
+3. [Database schema](#Database-schema)
+4. [Install](#Install)
+5. [Test](#Test)
+6. [Deployment](#Deployment)
+7. [Future features](#Future-features)
 
 ## Features<a name="Features"></a>:
 * Logged out users have the option to sign up for an account. Authentication is manged by the backend.
@@ -30,6 +31,9 @@ Jobly is a full featured job board with authentication. Users can browse and app
 
 ### Database Management:
 ![alt text](https://img.shields.io/badge/-PostgresSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)
+
+### Database Schema<a name="Database-schema"></a>::
+![database schema](jobly-schema-diagram.png)
 
 ## Install<a name="Install"></a>:
 
