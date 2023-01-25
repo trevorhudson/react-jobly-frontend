@@ -2,7 +2,8 @@
 
 Jobly is a full featured job board with authentication. Users can browse and apply to active job listings on a standalone page and use the search filter to find a job. A company list page displays all companies in the DB, and each companies page features a list of all posted jobs.
 
-<a href="https://react-jobly-frontend.onrender.com/">Try it out!</a>
+### [Live demo](https://jobly.demo.trevorhudson.dev)
+
 
 # Table of Contents
 1. [Features](#Features)
